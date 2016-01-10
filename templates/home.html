@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load django_markdown %}
+{% block nav %}
+  <a class="blog-nav-item active" href="{% url "index" %}">Home</a>
+  <a class="blog-nav-item" href="{% url "features" %}">New features</a>
+  <a class="blog-nav-item" href="{% url "press" %}">Press</a>
+  <a class="blog-nav-item" href="{% url "hires" %}">New hires</a>
+  <a class="blog-nav-item" href="{% url "about" %}">About</a>
+{% endblock %}
+{% block blog_title %} 
+	<div class="blog-header">
+        <h1 class="blog-title">My First Blog</h1>
+      </div>
+ {% endblock %}
+ 
+{% block blog_entries %}
+{% for object in object_list %}
+  <div class="post">
+    <h2><a href="{% url "entry_detail" slug=object.slug %}">{{ object.title }}</a></h2>
+    <p class="meta">
+      Created on {{ object.created }} | Last updated on {{ object.modified }} | 
+      Tagged under {{  object.tags.all|join:", " }}
+    </p>
+    {{ object.body|truncatechars:800 }}...<a href="{% url "entry_detail" slug=object.slug %}">Read more</a>
+  </div>
+{% endfor %}
+{% endblock %}

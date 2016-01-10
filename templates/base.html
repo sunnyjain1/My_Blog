@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>My First Blog</title>
+    <link href="{% static "css/blog.css" %}" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+        {% block nav %}{% endblock %}
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+      {% block blog_title %} {% endblock %}
+      <div class="row" margin-left = "50px">
+        <div class="col-md-8 blog-main">
+          {% block blog_entries %} {% endblock %}
+          {% if is_paginated %}
+            <ul class="pager">
+              <li {% if not page_obj.has_previous %}class="disabled"{% endif %}><a {% if page_obj.has_previous %}href="?page={{ page_obj.previous_page_number }}"{% endif %}>Prev</a></li>
+              <li {% if not page_obj.has_next %}class="disabled"{% endif %}><a {% if page_obj.has_next %}href="?page={{ page_obj.next_page_number }}"{% endif %}>Next</a></li>
+            </ul>
+          {% endif %}
+        </div>
+        <div class="col-md-3 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>Hi I am Sunny Jain. I am currently working in Grofers on a small project for creating a BLOG. So this is my blog which is related to random things happening in world. Enjoy...!!! :D</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="blog-footer">
+      <p>Contact :<a href="https://www.facebook.com/sunny.jain.20">Fb@Sunny</a> </p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </div>
+  </body>
+</html>
