@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load django_markdown %}
+{% block nav %}
+  <a class="blog-nav-item active" href="{% url "index" %}">Home</a>
+  <a class="blog-nav-item" href="{% url "features" %}">New features</a>
+  <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
+  <a class="blog-nav-item" href="{% url "register" %}">Register</a>
+{% endblock %}
+{% block blog_title %} 
+<div class="blog-header">
+  <h1 class="blog-title">My First Blog</h1>
+  <form method="get" id="searchform" action="/search/" class="frm">
+    <input type="text" size="20" name="s" id="s" class="in" required/>
+    <input type="submit" id="searchsubmit" value="Search" class="btn" />
+  </form>
+</div>
+ {% endblock %}
+ 
+{% block blog_entries %}
+  {% if x == 1 %}
+    {% for object in post %}
+      <div class="post">
+        <h2><a href="{% url "entry_detail" slug=object.slug %}">{{ object.title }}</a></h2>
+        <p class="meta">
+          Created on {{ object.created }} | Last updated on {{ object.modified }} | 
+          Tagged under {{  object.tags.all|join:", " }}
+        </p>
+        {{ object.body|truncatechars:800 }}...<a href="{% url "entry_detail" slug=object.slug %}">Read more</a>
+      </div>
+    {% endfor %}
+    <h3><a href="{% url "index" %}">&lt;Back</a></h3>
+  {% elif x == 0 %}
+    <div class="post">
+      <h2>Entry Not Found</h2>
+      <br>
+      <br>
+      <h3><a href="{% url "index" %}">&lt;Back</a></h3>
+    </div>
+  {% endif %}
+{% endblock %}

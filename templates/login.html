@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load django_markdown %}
+{% block nav %}
+  <a class="blog-nav-item" href="{% url "index" %}">Home</a>
+  <a class="blog-nav-item" href="{% url "features" %}">New features</a>
+  <a class="blog-nav-item active" href="{% url "login" %}">Log In</a>
+  <a class="blog-nav-item" href="{% url "register" %}">Register</a>
+{% endblock %}
+{% block blog_title %} 
+	<div class="blog-header">
+        <h1 class="blog-title">My First Blog</h1>
+     </div>
+{% endblock %}
+ 
+{% block blog_entries %}
+<div class="x cf">
+		<form name="login" action="#" method="get" accept-charset="utf-8" style="margin-left:50%; margin-top:10% ; margin-bottom:30%">
+		    <ul>
+		        <li><label for="usermail" >Usermail&nbsp;&nbsp;:&nbsp;</label>
+		        <input type="email" name="usermail" placeholder="email" required> </li>
+		        <li><label for="password" style="margin-top:10%">Password&nbsp;:&nbsp;</label>
+		        <input type="password" name="password" placeholder="password" required style="margin-top:20%"></li>
+		        <li>
+		        <input type="submit" value="Login" style="margin-top:40%;margin-bottom:100px"></li>
+		    </ul>
+		</form>
+</div>
+{% endblock %}

@@ -1,42 +1,10 @@
+/*
+ * Globals
+ */
 
-html {
-    font-family: sans-serif;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%
-}
-footer,header,main,
-{
-    display: block
-}
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #555;
-}
-.container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto
-}
-@media (min-width: 768px) {
-    .container {
-        width: 750px
-    }
-}
-@media (min-width: 992px) {
-    .container {
-        width: 970px
-    }
-}
-@media (min-width: 1200px) {
-    .container {
-        width: 1170px
-    }
-}
-.container-fluid {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
 }
 
 h1, .h1,
@@ -44,20 +12,17 @@ h2, .h2,
 h3, .h3,
 h4, .h4,
 h5, .h5,
-h6, .h6 { 
+h6, .h6 {
   margin-top: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #333;
 }
 
-a {
-  text-decoration: blink;
-}
 
-a:hover{
-  color: blue;
-}
+/*
+ * Override Bootstrap's default container.
+ */
 
 @media (min-width: 1200px) {
   .container {
@@ -65,12 +30,18 @@ a:hover{
   }
 }
 
+
+/*
+ * Masthead for nav
+ */
+
 .blog-masthead {
   background-color: #428bca;
   -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
           box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
 }
 
+/* Nav links */
 .blog-nav-item {
   position: relative;
   display: inline-block;
@@ -84,6 +55,7 @@ a:hover{
   text-decoration: none;
 }
 
+/* Active state gets a caret at the bottom */
 .blog-nav .active {
   color: #fff;
 }
@@ -102,12 +74,19 @@ a:hover{
 }
 
 
+/*
+ * Blog name and description
+ */
 
 .blog-header {
-  background-color: fff;
-  padding-top: 10px;
-  padding-bottom: 30px;
-  margin-right: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.blog-title {
+  margin-top: 30px;
+  margin-bottom: 0;
+  font-size: 60px;
+  font-weight: normal;
 }
 .blog-title {
   font-family: fantasy; 
@@ -123,13 +102,16 @@ a:hover{
   color: #999;
 }
 
-
+/*
+ * Main column and sidebar layout
+ */
 
 .blog-main {
   font-size: 18px;
   line-height: 1.5;
 }
 
+/* Sidebar modules for boxing content */
 .sidebar-module {
   padding: 15px;
   margin: 0 -15px 15px;
@@ -147,6 +129,7 @@ a:hover{
 
 
 
+/* Pagination */
 .pager {
   margin-bottom: 60px;
   text-align: left;
@@ -159,6 +142,9 @@ a:hover{
 }
 
 
+/*
+ * Blog posts
+ */
 
 .post {
   margin-bottom: 60px;
@@ -176,7 +162,12 @@ div.post h2:first-child a:hover {
 }
 
 
+/*
+ * Footer
+ */
+
 .blog-footer {
+  padding: 40px 0;
   color: #999;
   text-align: center;
   background-color: #f9f9f9;
@@ -185,39 +176,60 @@ div.post h2:first-child a:hover {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
-.row {
-    margin-right: -15px;
-    margin-left: -15px
+label {
+    color: #888;
 }
-.pager li>a:hover,
-.pager li>a:focus {
-    text-decoration: none;
-    background-color: #eee
+.cf:before,
+.cf:after {
+    content: ""; 
+
 }
-.pager .next>a,
-.pager .next>span {
-    float: right
+ 
+.cf:after {
+    clear: both;
 }
-.pager .previous>a,
-.pager .previous>span {
-    float: left
+.cf {
+    *zoom: 1;
 }
-.pager .disabled>a,
-.pager .disabled>a:hover,
-.pager .disabled>a:focus,
-.pager .disabled>span {
-    color: #777;
-    cursor: not-allowed;
-    background-color: #fff
-}
-.col-sm-3,
-.col-sm-8 {
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px
+:focus {
+    outline: 0;
 }
 
-.col-sm-offset-1 {
-        margin-left: 8.33333333%
+.x ul {
+    padding: 10px;
+    margin: 10px;
+}
+.x li {
+    float: left;
+}
+.x input:not([type=submit]) ,
+.blog-header .in
+{
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1),0px 1px 0px 0px rgba(250, 250, 250, 0.5) ;
+}
+.x input[type=submit],
+.blog-header .btn  
+{
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: #64c8ef; /* Old browsers */
+    background: -moz-linear-gradient(top,  #64c8ef 0%, #00a2e2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#64c8ef), color-stop(100%,#00a2e2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #64c8ef 0%,#00a2e2 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c8ef', endColorstr='#00a2e2',GradientType=0 ); /* IE6-9 */
+    color: #fff;
+    padding: 5px 15px;
+    margin-right: 0;
+    border-radius: 3px;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+.blog-header .frm{
+  
+  float: "right";
 }

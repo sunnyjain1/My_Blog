@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load django_markdown %}
+{% block nav %}
+  <a class="blog-nav-item" href="{% url "index" %}">Home</a>
+  <a class="blog-nav-item" href="{% url "features" %}">New features</a>
+  <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
+  <a class="blog-nav-item active" href="{% url "register" %}">Register</a>
+{% endblock %}
+{% block blog_title %} 
+	<div class="blog-header">
+        <h1 class="blog-title">My First Blog</h1>
+     </div>
+{% endblock %}
+ 
+{% block blog_entries %}
+<div class="x cf">
+		<form name="register" action="/message/" method="get" accept-charset="utf-8" style="margin-left:50%; margin-bottom:30%">
+		    <ul>
+		    	<li><label for="uname">Username&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+		    	<input type="text" name="uname" placeholder="Username" required> </li>
+		    	<li><label for="fname">First Name&nbsp;:&nbsp;&nbsp;</label>
+		    	<input type="text" name="fname" placeholder="First Name" required style="margin-top:10%"> </li>
+		    	<li><label for="lname">Last Name&nbsp;:&nbsp;&nbsp;</label>
+		    	<input type="text" name="lname" placeholder="Last Name" required style="margin-top:10%"> </li>
+		        <li><label for="usermail" >Usermail&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+		        <input type="email" name="usermail" placeholder="email" required style="margin-top:10%"> </li>
+		        <li><label for="password" style="margin-top:10%">Password&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+		        <input type="password" name="password" placeholder="password" required style="margin-top:10%"></li>
+		        <li>
+		        <input type="submit" value="Register" style="margin-left:100%; margin-top:40% ;margin-bottom:60%" onclick="msg"></li>
+		        <label id="msg">Successfully register <a href="/login/">Go to login </a></label>
+		    </ul>
+
+		</form>
+</div>
+{% endblock %}
