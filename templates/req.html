@@ -18,19 +18,22 @@
 {% endblock %}
  
 {% block blog_entries %}
-<div class="x">
-		<form name="login" action="/send/" method="get" accept-charset="utf-8" style="margin-left:50%; margin-top:10% ; margin-bottom:30%">
-		    <ul>
-		        <li><label for="title" >Title:</label>
+<div class="x cf">
+		<form name="login" action="/send/" method="get" accept-charset="utf-8" >
+		    <ul >
+		        <li><label for="title" style="margin-left:30%;margin-bottom:10px">Title&nbsp;:</label>
 		        <input type="text" name="title" placeholder="Title" required> </li>
-		        <li><label for="content" style="margin-top:10%">Content:</label>
-		        <input type="text" name="content" placeholder="Content" required style="margin-top:20%; margin-bottom:20%;"></li>
+		        <li><label for="content" style="margin-left:30%; margin-top:10px;margin-bottom:10px">Content&nbsp;:</label>
+		        <textarea rows="10" cols="70" type="text" name="content" placeholder="Content" required ></textarea>
+		        <li><label for="tags" style="margin-top:10px">Tags&nbsp;:</label>
 		        {% for objects in  object_list %}
+		        	<ul>
 		  			<li>
 		        		<label><input type="checkbox" name="tags" value={{ objects.slug }}>{{ objects.slug }}</label>
 		        	</li>
+		        	</ul>
 		        {% endfor %}
-		        <input type="submit" value="Send" style="margin-top:40%;margin-bottom:100px"></li>
+		        <input type="submit" value="Send" style="margin-top:20px;margin-bottom:20px;"></li>
 		    </ul>
 		</form>
 </div>

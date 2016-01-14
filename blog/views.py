@@ -1,5 +1,6 @@
 from django.views import generic
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 from django.shortcuts import render
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse
@@ -86,7 +87,21 @@ class BlogDetail(generic.DetailView):
 		context['check'] = l
 		context['num'] = num
  		return context
-	
+class send(generic.ListView):
+	paginate_by = 2
+	template_name = "home.html"
+	def get_queryset(self):
+		title = self.request.GET['title']
+		content = self.request.GET['content']
+		tags = self.request.GET.getlist('tags')
+		t = []
+		for p in tags:
+			x = models.Tag.objects.get(slug=p)
+			t.append(x.id)
+		curr_entry = models.Entry.objects.create(title=title,body=content,slug=slugify(title),publish=False)
+		#import pdb;pdb.set_trace()
+		curr_entry.tags = t
+		return models.Entry.objects.filter(publish=True)
 
 class features(generic.ListView):
 	queryset = models.Entry.objects.published()

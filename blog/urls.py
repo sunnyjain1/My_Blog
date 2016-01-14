@@ -12,5 +12,6 @@ urlpatterns = patterns(
     url(r'^request/$', views.req.as_view(), name="req"),
     url(r'^authenticate/$', views.Authen.as_view(), name="authen"),
     url(r'^message/$', views.message, name="msg"),
+    url(r'^send/$', views.send.as_view(), name="snt"),
     url(r'^entry/(?P<slug>\S+)/', views.BlogDetail.as_view(), name="entry_detail"),
 )
