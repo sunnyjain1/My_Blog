@@ -92,6 +92,9 @@ class features(generic.ListView):
 	queryset = models.Entry.objects.published()
 	template_name = "features.html"
 
+class req(generic.ListView):
+	queryset = models.Tag.objects.all()
+	template_name = "req.html"
 
 class register(generic.ListView):
 	queryset = models.Entry.objects.published()

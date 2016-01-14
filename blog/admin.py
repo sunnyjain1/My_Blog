@@ -11,7 +11,7 @@ class EntryAdmin(MarkdownModelAdmin):
     formfield_overrides = {TextField: {'widget': AdminMarkdownWidget}}
 
 class LikeAdmin(MarkdownModelAdmin):
-	list_display = ("id" ,"user","blog","created")
+	list_display = ("user","blog","created")
 
 admin.site.register(models.Entry, EntryAdmin)
 admin.site.register(models.Tag)

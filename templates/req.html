@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load django_markdown %}
+{% block nav %}
+  <a class="blog-nav-item" href="{% url "index" %}">Home</a>
+  <a class="blog-nav-item" href="{% url "features" %}">New features</a>
+  {% if not user.is_authenticated %}
+    <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
+    <a class="blog-nav-item" href="{% url "register" %}">Register</a>
+  {% else %}
+    <a class="blog-nav-item" href="#">Welcome {{ user.get_username }}</a>
+    <a class="blog-nav-item" href="{% url "logout" %}">Log Out</a>
+  {% endif %}
+{% endblock %}
+{% block blog_title %} 
+	<div class="blog-header">
+        <h1 class="blog-title">My First Blog</h1>
+     </div>
+{% endblock %}
+ 
+{% block blog_entries %}
+<div class="x">
+		<form name="login" action="/send/" method="get" accept-charset="utf-8" style="margin-left:50%; margin-top:10% ; margin-bottom:30%">
+		    <ul>
+		        <li><label for="title" >Title:</label>
+		        <input type="text" name="title" placeholder="Title" required> </li>
+		        <li><label for="content" style="margin-top:10%">Content:</label>
+		        <input type="text" name="content" placeholder="Content" required style="margin-top:20%; margin-bottom:20%;"></li>
+		        {% for objects in  object_list %}
+		  			<li>
+		        		<label><input type="checkbox" name="tags" value={{ objects.slug }}>{{ objects.slug }}</label>
+		        	</li>
+		        {% endfor %}
+		        <input type="submit" value="Send" style="margin-top:40%;margin-bottom:100px"></li>
+		    </ul>
+		</form>
+</div>
+{% endblock %}

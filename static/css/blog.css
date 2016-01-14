@@ -191,9 +191,7 @@ label {
 .cf {
     *zoom: 1;
 }
-:focus {
-    outline: 0;
-}
+
 
 .x ul {
     padding: 10px;
@@ -212,7 +210,8 @@ label {
     box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1),0px 1px 0px 0px rgba(250, 250, 250, 0.5) ;
 }
 .x input[type=submit],
-.blog-header .btn  
+.blog-header .btn,
+.send input[type=submit]
 {
     border: 1px solid rgba(0, 0, 0, 0.3);
     background: #64c8ef; /* Old browsers */
