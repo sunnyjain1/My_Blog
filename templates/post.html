@@ -3,16 +3,33 @@
 {% block nav %}
   <a class="blog-nav-item" href="{% url "index" %}">Home</a>
   <a class="blog-nav-item" href="{% url "features" %}">New features</a>
-  <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
-  <a class="blog-nav-item" href="{% url "register" %}">Register</a>
+  {% if not user.is_authenticated %}
+    <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
+    <a class="blog-nav-item" href="{% url "register" %}">Register</a>
+  {% else %}
+    <a class="blog-nav-item" href="#">Welcome {{ user.get_username }}</a>
+    <a class="blog-nav-item" href="{% url "logout" %}">Log Out</a>
+  {% endif %}
 {% endblock %}
 {% block blog_entries %}
   <div class="post">
-    <h2><a href="{% url "entry_detail" slug=object.slug %}">{{ object.title }}</a></h2>
+    <h2><a href="{% url "entry_detail" slug=object.slug %}?home">{{ object.title }}</a></h2>
     <p class="meta">
       {{ object.created }} |
       Tagged under {{  object.tags.all|join:", " }}
     </p>
     {{ object.body|markdown }}
+    <form action ="{% url "entry_detail" slug=object.slug %}" method="get">
+      <input id ="like" value="{% if check == 1 %}Unike{% else %}Like{% endif %}" type="Submit" ></input>
+    </form>
   </div>
+   <!--script type="text/javascript">
+  //     function like () {
+  //         if(document.getElementById("like").value == "Like"){
+  //           document.getElementById("like").value = "Unlike";
+  //         }else{
+  //           document.getElementById("like").value = "Like";
+  //         }
+  //     }
+  // </script-->
 {% endblock %}

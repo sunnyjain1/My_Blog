@@ -10,5 +10,9 @@ class EntryAdmin(MarkdownModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     formfield_overrides = {TextField: {'widget': AdminMarkdownWidget}}
 
+class LikeAdmin(MarkdownModelAdmin):
+	list_display = ("id" ,"user","blog","created")
+
 admin.site.register(models.Entry, EntryAdmin)
 admin.site.register(models.Tag)
+admin.site.register(models.Like,LikeAdmin)

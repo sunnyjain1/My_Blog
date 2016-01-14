@@ -14,10 +14,10 @@
  
 {% block blog_entries %}
 <div class="x cf">
-		<form name="login" action="#" method="get" accept-charset="utf-8" style="margin-left:50%; margin-top:10% ; margin-bottom:30%">
+		<form name="login" action="/authenticate/" method="get" accept-charset="utf-8" style="margin-left:50%; margin-top:10% ; margin-bottom:30%">
 		    <ul>
-		        <li><label for="usermail" >Usermail&nbsp;&nbsp;:&nbsp;</label>
-		        <input type="email" name="usermail" placeholder="email" required> </li>
+		        <li><label for="username" >Username&nbsp;&nbsp;:&nbsp;</label>
+		        <input type="text" name="username" placeholder="username" required> </li>
 		        <li><label for="password" style="margin-top:10%">Password&nbsp;:&nbsp;</label>
 		        <input type="password" name="password" placeholder="password" required style="margin-top:20%"></li>
 		        <li>

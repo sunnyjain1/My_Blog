@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 
 
 class Tag(models.Model):
@@ -10,8 +11,10 @@ class Tag(models.Model):
 
 
 class EntryQuerySet(models.QuerySet):
+
     def published(self):
         return self.filter(publish=True)
+
 
 
 class Entry(models.Model):
@@ -35,3 +38,10 @@ class Entry(models.Model):
         verbose_name = "Blog Entry"
         verbose_name_plural = "Blog Entries"
         ordering = ["-modified"]
+
+class Like(models.Model):
+    user = models.ForeignKey(User)
+    blog = models.ForeignKey(Entry)
+    created = models.DateTimeField(auto_now_add=True)
+
+
