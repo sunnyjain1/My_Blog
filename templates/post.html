@@ -20,7 +20,7 @@
     </p>
     {{ object.body|markdown }}
     <form action ="{% url "entry_detail" slug=object.slug %}" method="get">
-      <input id ="like" value="{% if check == 1 %}Unike{% else %}Like{% endif %}" type="Submit" ></input>
+      <input id ="like" value="{% if check == 1 %}Unike{% else %}Like{% endif %}" type="Submit" >&nbsp;{{num}}</input>
     </form>
   </div>
    <!--script type="text/javascript">

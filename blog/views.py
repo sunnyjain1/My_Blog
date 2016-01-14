@@ -60,14 +60,31 @@ class BlogDetail(generic.DetailView):
 		url = self.request.get_full_path()
 		x = url.split("/")
 		y = x[len(x)-2]
+		z = x[len(x)-1]
 		blog = models.Entry.objects.filter(slug=y)
-		t = models.Like.objects.filter(user=uname, blog=blog)
-		if not t:
-			l=0;
-		else:
-			l=1;
-		context['check'] = l
 		#import pdb; pdb.set_trace()
+		if self.request.user.is_authenticated():
+			t = models.Like.objects.filter(user=uname, blog=blog)
+		else:
+			t = []
+		if z == "?home":
+			if not t:
+				l=0;
+			else:
+				l=1;
+		else:
+			if not t:
+				if self.request.user.is_authenticated():
+					models.Like.objects.create(user=uname, blog=blog[0])
+					l=1;
+				else :
+					l=0;
+			else:
+				t.delete()
+				l=0;
+		num = len(models.Like.objects.filter(blog=blog))
+		context['check'] = l
+		context['num'] = num
  		return context
 	
 
