@@ -13,23 +13,40 @@
 {% endblock %}
 {% block blog_entries %}
   <div class="post">
-    <h2><a href="{% url "entry_detail" slug=object.slug %}?home">{{ object.title }}</a></h2>
+    <h2><a href="{% url "entry_detail" slug=slug %}?home">{{ object.title }}</a></h2>
     <p class="meta">
       {{ object.created }} |
       Tagged under {{  object.tags.all|join:", " }}
     </p>
     {{ object.body|markdown }}
-    <form action ="{% url "entry_detail" slug=object.slug %}" method="get">
-      <input id ="like" value="{% if check == 1 %}Unike{% else %}Like{% endif %}" type="Submit" >&nbsp;{{num}}</input>
-    </form>
+      <input  value="{% if check == 1 %}Unlike{% else %}Like{% endif %}" id="like_btn" type="button" style="color:#fff;background:#64c8ef;pading:5px 15px;border: 1px solid rgba(0, 0, 0, 0.3);margin-right: 0;border-radius: 3px;text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);" >
+      <b>&nbsp;<span id="num">{{num}}</span></b></input>
+    <!--input type="button" id="like" value={{ like }}> &nbsp; {{num}}</input-->
   </div>
-   <!--script type="text/javascript">
-  //     function like () {
-  //         if(document.getElementById("like").value == "Like"){
-  //           document.getElementById("like").value = "Unlike";
-  //         }else{
-  //           document.getElementById("like").value = "Like";
-  //         }
-  //     }
-  // </script-->
+  <script>
+		$('#like_btn').on("click", function(event) {
+			event.preventDefault();
+			like();
+	
+		});
+		function like(){
+			$.ajax({
+				type: "GET",
+				url: "{% url "entry_detail" slug=slug %}",
+				data :{'csrfmiddlewaretoken': '{{ csrf_token }}'  },
+				contentType: "application/json;charset=utf-8",
+				dataType: "json",
+				success: function(data)
+				{
+					if (data['check'] == 1){
+						document.getElementById("like_btn").value="Unlike";
+						document.getElementById("num").innerHTML=data['num'];
+					}else{
+						document.getElementById("like_btn").value="Like";
+						document.getElementById("num").innerHTML=data['num'];
+					}
+				}
+			});
+		}
+  </script> 
 {% endblock %}
