@@ -20,8 +20,21 @@
     </p>
     {{ object.body|markdown }}
       <input  value="{% if check == 1 %}Unlike{% else %}Like{% endif %}" id="like_btn" type="button" style="color:#fff;background:#64c8ef;pading:5px 15px;border: 1px solid rgba(0, 0, 0, 0.3);margin-right: 0;border-radius: 3px;text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);" >
-      <b>&nbsp;<span id="num">{{num}}</span></b></input>
-    <!--input type="button" id="like" value={{ like }}> &nbsp; {{num}}</input-->
+	 <b>&nbsp;<span id="num">{% if num %} {{num}} {% endif %}</span></b></input>
+      <hr>
+	  <h3><b>Comments:</b></h3> <br><br>
+	  <ul id="uid">
+			{% for object in comm  %}
+					<li>{{object.user}}&nbsp;:&nbsp;&nbsp;{{object.value}}</li><hr>
+			{% endfor %}
+		</ul>
+      <input type="text" id="comment_box" placeholder="Enter Comment" style="padding:10px;width:100% ;height:10%;margin-bottom:10px;"></input>
+      {% if user.is_authenticated %}
+	  <input type="button" id="cmt" value="comment" style="color:#fff;background:#64c8ef;pading:5px 15px;border: 1px solid rgba(0, 0, 0, 0.3);margin-right: 0;border-radius: 3px;text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);"></input> {% csrf_token %}
+      {% else %}
+	  <input type="button" id="log" value="login" style="color:#fff;background:#64c8ef;pading:5px 15px;border: 1px solid rgba(0, 0, 0, 0.3);margin-right: 0;border-radius: 3px;text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);"></input>
+  {% endif %}
+		
   </div>
   <script>
 		$('#like_btn').on("click", function(event) {
@@ -32,8 +45,7 @@
 		function like(){
 			$.ajax({
 				type: "GET",
-				url: "{% url "entry_detail" slug=slug %}",
-				data :{'csrfmiddlewaretoken': '{{ csrf_token }}'  },
+				url: "{% url "entry_detail" slug=slug %}?like",
 				contentType: "application/json;charset=utf-8",
 				dataType: "json",
 				success: function(data)
@@ -43,10 +55,42 @@
 						document.getElementById("num").innerHTML=data['num'];
 					}else{
 						document.getElementById("like_btn").value="Like";
-						document.getElementById("num").innerHTML=data['num'];
+						if(data['num'] != 0)
+							document.getElementById("num").innerHTML=data['num'];
+						else
+							document.getElementById("num").innerHTML="";
 					}
 				}
 			});
 		}
+		$('#cmt').on("click",function(event) {
+			event.preventDefault();
+			comment();	
+		});
+		function comment(){
+			var val = document.getElementById("comment_box").value;
+			if(val == ""){
+				alert("Write something");
+				return;
+			}
+			$.ajax({
+				type: "GET", 
+				url: "{% url "entry_detail" slug=slug %}?comment",
+				contentType: "application/json;charset=utf-8",
+				dataType: "json",
+				data: {
+					'val': val
+				},
+				success: function(data)
+				{
+					document.getElementById("comment_box").value = "";
+					var list = document.getElementById("uid");
+					$("<li>" + data['username'] + " : &nbsp; " + data['value'] + "</li><hr>").appendTo(list);
+				}
+			});
+		}
+		$('#log').on("click",function(event) {
+			window.location="/login";		
+		});
   </script> 
 {% endblock %}

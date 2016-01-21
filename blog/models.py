@@ -44,4 +44,11 @@ class Like(models.Model):
     blog = models.ForeignKey(Entry)
     created = models.DateTimeField(auto_now_add=True)
 
+class Comment(models.Model):
+	user = models.ForeignKey(User)
+	value = models.CharField(max_length=300)
+	blog = models.ForeignKey(Entry)
+	created = models.DateTimeField(auto_now_add=True)
 
+	class Meta:
+		ordering = ["created"]

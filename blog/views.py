@@ -53,53 +53,7 @@ class Authen(generic.ListView):
 		else:
 			self.template_name = "login.html"
 			return []
-#class BlogDetail(AjaxableResponseMixin,generic.FormView):
-#	model = models.Entry
-#	template_name = "post.html"
-#	def get_context_data(self, **kwargs):
-##context = super(BlogDetail, self).get_context_data(**kwargs)
-#		uname = self.request.user
-#		url = self.request.get_full_path()
-#		x = url.split("/")
-#		y = x[len(x)-2]
-#		z = x[len(x)-1]
-#		blog = models.Entry.objects.filter(slug=y)
-#		#import pdb; pdb.set_trace()
-#		if self.request.user.is_authenticated():
-#			t = models.Like.objects.filter(user=uname, blog=blog)
-#		else:
-#			t = []
-#		if z == "?home":
-#			if not t:
-#				l=0;
-#			else:
-#				l=1;
-#		else:
-#			if not t:
-#				if self.request.user.is_authenticated():
-#					models.Like.objects.create(user=uname, blog=blog[0])
-#					l=1;
-#				else :
-#					l=0;
-#			else:
-#				t.delete()
-#				l=0;
-#		num = len(models.Like.objects.filter(blog=blog))
-#		context['check'] = l
-#		context['num'] = num
-#	#	import pdb;pdb.set_trace()
-# 		return context
-#	def form_valid(self, form):
-#		response = super(AjaxableResponseMixin, self).form_valid(form)
-#		import pdb;pdb.set_trace()
-#		if self.request.is_ajax():
-#			data = {
-#				'pk': self.object.pk,
-#			}
-#			return self.render_to_json_response(data)
-#		else:
-#			return response
-#
+
 
 def BlogDetail(request,slug):
 	uname = request.user
@@ -108,19 +62,20 @@ def BlogDetail(request,slug):
 	y = x[len(x)-2]
 	z = x[len(x)-1]
 	blog = models.Entry.objects.filter(slug=y)
+	allc = models.Comment.objects.filter(blog=blog)
 	#import pdb; pdb.set_trace()
 	if request.user.is_authenticated():
 		t = models.Like.objects.filter(user=uname, blog=blog)
 	else:
 		t = []
-	if z == "?home":
+	if z == "?home" or z == "":
 		if not t:
 			l=0;
 		else:
 			l=1;
 		num = len(models.Like.objects.filter(blog=blog))
-		return render(request,'post.html',{'check':l,'num':num,'slug':slug,'object':blog[0]})
-	else:
+		return render(request,'post.html',{'check':l,'num':num,'slug':slug,'object':blog[0],'comm':allc})
+	elif z == "?like":
 		if not t:
 			if request.user.is_authenticated():
 				models.Like.objects.create(user=uname, blog=blog[0])
@@ -135,8 +90,15 @@ def BlogDetail(request,slug):
 		resp['check'] = l
 		resp['num'] = num
 		return HttpResponse(json.dumps(resp),content_type="application/json")
-
-
+	else:
+		#import pdb;pdb.set_trace()
+		content = request.GET.get('val')
+		models.Comment.objects.create(user=uname, blog=blog[0],value=content)
+		allcom = models.Comment.objects.filter(blog=blog[0])
+		x = len(allcom)
+		data = {'username':allcom[x-1].user.username,'value':allcom[x-1].value} 
+		return HttpResponse(json.dumps(data), content_type="application/jason")
+		
 class send(generic.ListView):
 	paginate_by = 2
 	template_name = "home.html"
