@@ -114,7 +114,9 @@ class send(generic.ListView):
 		#import pdb;pdb.set_trace()
 		curr_entry.tags = t
 		return models.Entry.objects.filter(publish=True)
-
+def profile(request,slug):
+	user = User.objects.filter(username=slug);
+	return render(request,'profile.html',{'user':user})
 class features(generic.ListView):
 	queryset = models.Entry.objects.published()
 	template_name = "features.html"
