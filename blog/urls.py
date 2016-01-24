@@ -13,5 +13,6 @@ urlpatterns = patterns(
     url(r'^authenticate/$', views.Authen.as_view(), name="authen"),
     url(r'^message/$', views.message, name="msg"),
     url(r'^send/$', views.send.as_view(), name="snt"),
+    url(r'^profile/(?P<slug>\S+)/$',views.profile, name="profile"),
     url(r'^entry/(?P<slug>\S+)/', views.BlogDetail, name="entry_detail"),
 )

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load django_markdown %}
+{% block nav %}
+  <a class="blog-nav-item" href="{% url "index" %}">Home</a>
+  <a class="blog-nav-item" href="{% url "features" %}">New features</a>
+  {% if not user.is_authenticated %}
+    <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
+    <a class="blog-nav-item" href="{% url "register" %}">Register</a>
+  {% else %}
+    <a class="blog-nav-item" href="{% url "profile" slug=user.username|slugify %}"> {{ user.get_username }}</a>
+    <a class="blog-nav-item" href="{% url "logout" %}">Log Out</a>
+  {% endif %}
+{% endblock %}
+{% block blog_title %} 
+	<div class="blog-header">
+        <h1 class="blog-title">My First Blog</h1>
+     </div>
+{% endblock %}
+ 
+{% block blog_entries %}
+<div class="name" style="margin-bottom:10px">
+    <img src="http://lh4.googleusercontent.com/-MNyRU_eTqNg/UskAvLai-PI/AAAAAAAAAME/9hQu-Xh_JKs/s300/default-avatar.png"></img>
+    <h1><a href="{% url "profile" slug=user.username|slugify %}" style="text-decoration:blink">{{ user.get_username }}</a></h1>
+</div>
+<div class="detail" style="margin-top:10px">
+  <h2>Detail :</h2><br>
+  <b>Username&nbsp;:&nbsp;</b>{{ user.username }}
+  <b>First Name&nbsp;:&nbsp;</b>{{ user.first_name }}
+  <b>Last Name&nbsp;:&nbsp;</b>{{ user.last_name }}
+  <b>Email&nbsp;:&nbsp;</b>{{ user.email }}
+</div>
+{% endblock %}

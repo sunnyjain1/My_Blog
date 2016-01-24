@@ -7,7 +7,7 @@
     <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
     <a class="blog-nav-item" href="{% url "register" %}">Register</a>
   {% else %}
-    <a class="blog-nav-item" href="#">Welcome {{ user.get_username }}</a>
+    <a class="blog-nav-item" href="{% url "profile" slug=user.username|slugify %}"> {{ user.get_username }}</a>
     <a class="blog-nav-item" href="{% url "logout" %}">Log Out</a>
   {% endif %}
 {% endblock %}
@@ -28,11 +28,15 @@
 					<li>{{object.user}}&nbsp;:&nbsp;&nbsp;{{object.value}}</li><hr>
 			{% endfor %}
 		</ul>
-      <input type="text" id="comment_box" placeholder="Enter Comment" style="padding:10px;width:100% ;height:10%;margin-bottom:10px;"></input>
-      {% if user.is_authenticated %}
-	  <input type="button" id="cmt" value="comment" style="color:#fff;background:#64c8ef;pading:5px 15px;border: 1px solid rgba(0, 0, 0, 0.3);margin-right: 0;border-radius: 3px;text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);"></input> {% csrf_token %}
-      {% else %}
-	  <input type="button" id="log" value="login" style="color:#fff;background:#64c8ef;pading:5px 15px;border: 1px solid rgba(0, 0, 0, 0.3);margin-right: 0;border-radius: 3px;text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);"></input>
+	<div ng-app="comment" ng-controller="showbut">
+      <span ng-click="mydata.show_button()"><input type="text" id="comment_box" placeholder="Enter Comment" style="padding:10px;width:100% ;height:10%;margin-bottom:10px;"></input></span>
+      <span ng-show="mydata.showit">
+	      {% if user.is_authenticated %}
+		  <input type="button" id="cmt" value="comment" style="color:#fff;background:#64c8ef;pading:5px 15px;border: 1px solid rgba(0, 0, 0, 0.3);margin-right: 0;border-radius: 3px;text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);"></input> {% csrf_token %}
+	      {% else %}
+		  <input type="button" id="log" value="login" style="color:#fff;background:#64c8ef;pading:5px 15px;border: 1px solid rgba(0, 0, 0, 0.3);margin-right: 0;border-radius: 3px;text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);"></input>
+		</span>
+	</div>
   {% endif %}
 		
   </div>
@@ -91,6 +95,13 @@
 		}
 		$('#log').on("click",function(event) {
 			window.location="/login";		
+		});
+		angular.module("comment",[]).controller("showbut",function($scope){
+				$scope.mydata = {};
+				$scope.mydata.showit=false;
+				$scope.mydata.show_button = function(){
+					$scope.mydata.showit=true;
+				}
 		});
   </script> 
 {% endblock %}
