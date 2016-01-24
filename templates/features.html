@@ -7,7 +7,7 @@
     <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
     <a class="blog-nav-item" href="{% url "register" %}">Register</a>
   {% else %}
-    <a class="blog-nav-item" href="{% url "profile" slug=user.username|slugify %}"> {{ user.get_username }}</a>
+    <a class="blog-nav-item" href="{% url "profile" slug=user.username %}"> {{ user.get_username }}</a>
     <a class="blog-nav-item" href="{% url "logout" %}">Log Out</a>
   {% endif %}
 {% endblock %}

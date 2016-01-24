@@ -18,5 +18,6 @@ class CommentAdmin(MarkdownModelAdmin):
 
 admin.site.register(models.Entry, EntryAdmin)
 admin.site.register(models.Tag)
+admin.site.register(models.Bloguser)
 admin.site.register(models.Comment, CommentAdmin)
 admin.site.register(models.Like,LikeAdmin)
