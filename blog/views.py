@@ -33,8 +33,10 @@ def message(request):
 	lname = request.GET['lname']
 	mail = request.GET['usermail']
 	pswd = request.GET['password']
+	uname = slugify(uname)
 	if len(User.objects.filter(username = uname)) == 0:
 		user = User.objects.create_user(uname,first_name=fname,last_name=lname,email=mail,password=pswd)
+		models.Bloguser.objects.create(user=user)
 		return render(request,'login.html')
 	else:
 		return render(request,'register.html')
@@ -115,8 +117,10 @@ class send(generic.ListView):
 		curr_entry.tags = t
 		return models.Entry.objects.filter(publish=True)
 def profile(request,slug):
+	#import pdb;pdb.set_trace()
 	user = User.objects.filter(username=slug);
-	return render(request,'profile.html',{'user':user})
+	bu = models.Bloguser.objects.filter(user=user)
+	return render(request,'profile.html',{'bu':bu[0],'slug':slug})
 class features(generic.ListView):
 	queryset = models.Entry.objects.published()
 	template_name = "features.html"

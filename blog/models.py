@@ -15,7 +15,14 @@ class EntryQuerySet(models.QuerySet):
     def published(self):
         return self.filter(publish=True)
 
-
+class Bloguser(models.Model):
+    slug = models.SlugField(max_length=200, unique=True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    tagline = models.CharField(max_length=100)
+    def get_absolute_url(self):
+        return reverse("profile",kwargs={"slug": self.slug})
+    def __str__(self):
+        return self.slug
 
 class Entry(models.Model):
     title = models.CharField(max_length=200)

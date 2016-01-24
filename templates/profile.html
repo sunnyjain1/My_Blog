@@ -7,7 +7,7 @@
     <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
     <a class="blog-nav-item" href="{% url "register" %}">Register</a>
   {% else %}
-    <a class="blog-nav-item" href="{% url "profile" slug=user.username|slugify %}"> {{ user.get_username }}</a>
+    <a class="blog-nav-item" href="{% url "profile" slug=user.username %}"> {{ user.get_username }}</a>
     <a class="blog-nav-item" href="{% url "logout" %}">Log Out</a>
   {% endif %}
 {% endblock %}
@@ -20,13 +20,14 @@
 {% block blog_entries %}
 <div class="name" style="margin-bottom:10px">
     <img src="http://lh4.googleusercontent.com/-MNyRU_eTqNg/UskAvLai-PI/AAAAAAAAAME/9hQu-Xh_JKs/s300/default-avatar.png"></img>
-    <h1><a href="{% url "profile" slug=user.username|slugify %}" style="text-decoration:blink">{{ user.get_username }}</a></h1>
+    <h1><a href="{% url "profile" slug=slug %}" style="text-decoration:blink">{{ bu.user.first_name }}&nbsp;{{bu.user.last_name}}</a></h1>
+    <hr><h4><b>Tagline</b>&nbsp;:&nbsp;&nbsp;{{ bu.tagline }}</h4><hr>
 </div>
 <div class="detail" style="margin-top:10px">
-  <h2>Detail :</h2><br>
-  <b>Username&nbsp;:&nbsp;</b>{{ user.username }}
-  <b>First Name&nbsp;:&nbsp;</b>{{ user.first_name }}
-  <b>Last Name&nbsp;:&nbsp;</b>{{ user.last_name }}
-  <b>Email&nbsp;:&nbsp;</b>{{ user.email }}
+  <br><h3><u>Details</u> :</h3><hr>
+  <p><b>Username&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.username }}</p><hr>
+  <p><b>First Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.first_name }}</p><hr>
+  <p><b>Last Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.last_name }}</p><hr>
+  <p><b>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.email }}</p><hr>
 </div>
 {% endblock %}
