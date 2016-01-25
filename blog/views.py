@@ -99,7 +99,7 @@ def BlogDetail(request,slug):
 		allcom = models.Comment.objects.filter(blog=blog[0])
 		x = len(allcom)
 		data = {'username':allcom[x-1].user.username,'value':allcom[x-1].value} 
-		return HttpResponse(json.dumps(data), content_type="application/jason")
+		return HttpResponse(json.dumps(data), content_type="application/json")
 		
 class send(generic.ListView):
 	paginate_by = 2
@@ -117,10 +117,24 @@ class send(generic.ListView):
 		curr_entry.tags = t
 		return models.Entry.objects.filter(publish=True)
 def profile(request,slug):
-	#import pdb;pdb.set_trace()
+	url = request.get_full_path()
+	x = url.split("/")
+	y = x[len(x)-2]
+	z = x[len(x)-1]
 	user = User.objects.filter(username=slug);
 	bu = models.Bloguser.objects.filter(user=user)
-	return render(request,'profile.html',{'bu':bu[0],'slug':slug})
+	#import pdb;pdb.set_trace()
+	if z == "":
+		return render(request,'profile.html',{'bu':bu[0],'slug':slug})
+	else:
+		likes = models.Like.objects.filter(user = user)
+		comment = models.Comment.objects.filter(user = user)
+		data = []
+		for l in likes:
+			data.append({'type':'like','blog':l.blog.title,'created':l.created.strftime('%B %d, %Y %I:%M %p')})
+		for c in comment:
+			data.append({'type':'comment','blog':c.blog.title,'value':c.value,'created':c.created.strftime('%B %d, %Y %I:%M %p')})
+		return HttpResponse(json.dumps(data),content_type="application/json")
 class features(generic.ListView):
 	queryset = models.Entry.objects.published()
 	template_name = "features.html"
