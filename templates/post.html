@@ -25,7 +25,7 @@
 	  <h3><b>Comments:</b></h3> <br><br>
 	  <ul id="uid">
 			{% for object in comm  %}
-					<li><a href="{% url "profile" slug=object.user.username %}">{{object.user.first_name}}&nbsp;{{object.user.last_name}}</a>&nbsp;:&nbsp;&nbsp;{{object.value}}</li><hr>
+					<li><a href="{% url "profile" slug=object.user.username %}">{{object.user.first_name}}&nbsp;{{object.user.last_name}}</a>&nbsp;:&nbsp;&nbsp;{{object.value}}</li><b><h5 style="text-color:grey">on {{ object.created }}</h5></b><hr>
 			{% endfor %}
 		</ul>
 	<div ng-app="comment" ng-controller="showbut">

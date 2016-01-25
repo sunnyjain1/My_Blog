@@ -18,16 +18,51 @@
 {% endblock %}
  
 {% block blog_entries %}
-<div class="name" style="margin-bottom:10px">
-    <img src="http://lh4.googleusercontent.com/-MNyRU_eTqNg/UskAvLai-PI/AAAAAAAAAME/9hQu-Xh_JKs/s300/default-avatar.png"></img>
-    <h1><a href="{% url "profile" slug=slug %}" style="text-decoration:blink">{{ bu.user.first_name }}&nbsp;{{bu.user.last_name}}</a></h1>
-    <hr><h4><b>Tagline</b>&nbsp;:&nbsp;&nbsp;{{ bu.tagline }}</h4><hr>
+<div ng-app="profile" ng-controller="recent" style="margin-bottom:10px">
+    <img src="http://lh4.googleusercontent.com/-MNyRU_eTqNg/UskAvLai-PI/AAAAAAAAAME/9hQu-Xh_JKs/s300/default-avatar.png"/>
+    <h1><a href="{% url "profile" slug=slug %}" style="text-decoration:blink;float:left:margin-bottom:10px">{{ bu.user.first_name }}&nbsp;{{bu.user.last_name}}</a></h1>
+    <div ng-click="mydata.rec()"><h5><a href="" style="text-decoration:blink;float:right;margin-left:10px">recent activity</a></h5></div>
+    <div ng-click="mydata.pro()"><h5><a href="" style="text-decoration:blink;float:right;margin-right:10px">Profile</a></h5></div>
+    <hr><h4><b>Tagline</b>&nbsp;:&nbsp;&nbsp;{{bu.tagline}}</h4><hr>
+    <div ng-show="mydata.showit">
+      <br><h3><u>Details</u> :</h3><hr>
+      <p><b>Username&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.username }}</p><hr>
+      <p><b>First Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.first_name }}</p><hr>
+      <p><b>Last Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.last_name }}</p><hr>
+      <p><b>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.email }}</p><hr>
+    </div>
+    <div ng-show="!mydata.showit">
+       <br><h2>Likes : </h2><hr>
+       <div ng-repeat="x in mydata.datac">
+          <div ng-if="x.type == 'like'">
+            {% verbatim %} <b>{{x.blog}}</b> on {{x.created}} {% endverbatim %}
+         </div>
+       </div>
+       <br><h2>Comments :</h2><hr> 
+       <div ng-repeat="x in mydata.datac">
+          <div ng-if="x.type == 'comment'">
+            {% verbatim %} <b>{{x.value}}</b> on <b>{{x.blog}}</b> on {{x.created}} {% endverbatim %}
+         </div>
+       </div>
+    </div>
 </div>
-<div class="detail" style="margin-top:10px">
-  <br><h3><u>Details</u> :</h3><hr>
-  <p><b>Username&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.username }}</p><hr>
-  <p><b>First Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.first_name }}</p><hr>
-  <p><b>Last Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.last_name }}</p><hr>
-  <p><b>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</b>{{ bu.user.email }}</p><hr>
-</div>
+<script>
+    angular.module("profile",[]).controller("recent",function($scope,$http) {
+        $scope.mydata = {};
+        $scope.mydata.showit = true;
+        $scope.mydata.datac = {};
+        $scope.mydata.rec = function(){
+          var url="{% url "profile" slug=slug %}?recentactivities";
+          $http.get(url).success(function(response) {
+              $scope.mydata.datac = response;
+              console.log($scope.mydata.datac);
+          })
+          $scope.mydata.showit=false;
+        }
+        $scope.mydata.pro = function(){
+          $scope.mydata.showit=true;
+        } 
+
+    });
+</script>
 {% endblock %}
