@@ -26,9 +26,10 @@
 		        <input type="email" name="usermail" placeholder="email" required style="margin-top:10%"> </li>
 		        <li><label for="password" style="margin-top:10%">Password&nbsp;&nbsp;:&nbsp;&nbsp;</label>
 		        <input type="password" name="password" placeholder="password" required style="margin-top:10%"></li>
-		        <li>
-		        <input type="submit" value="Register" style="margin-left:100%; margin-top:40% ;margin-bottom:60%" onclick="msg"></li>
-		        <label id="msg">Successfully register <a href="/login/">Go to login </a></label>
+		        <li><label for="tl">Tagline&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+		    	<input type="text" name="tl" placeholder="Tagline" style="margin-top:10%"> </li>
+		    	<li><p style="text-color:red">Username already exists <a href="/login/">Go to login </a></p></li>
+		    	<li><input type="submit" value="Register" style="margin-left:200%; ;margin-bottom:60%" onclick="msg"></li>
 		    </ul>
 
 		</form>

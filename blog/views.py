@@ -33,13 +33,14 @@ def message(request):
 	lname = request.GET['lname']
 	mail = request.GET['usermail']
 	pswd = request.GET['password']
+	tgln = request.GET['tl']
 	uname = slugify(uname)
 	if len(User.objects.filter(username = uname)) == 0:
 		user = User.objects.create_user(uname,first_name=fname,last_name=lname,email=mail,password=pswd)
-		models.Bloguser.objects.create(user=user)
+		models.Bloguser.objects.create(user=user,slug=uname,tagline=tgln)
 		return render(request,'login.html')
 	else:
-		return render(request,'register.html')
+		return render(request,'msg.html')
 
 class Authen(generic.ListView):
 	paginate_by = 2
@@ -144,11 +145,11 @@ class req(generic.ListView):
 	template_name = "req.html"
 
 class register(generic.ListView):
-	queryset = models.Entry.objects.published()
+	queryset = []
 	template_name = "register.html"
 
 class Login(generic.ListView):
-	queryset = models.Entry.objects.published()
+	queryset = []
 	template_name = "login.html"
 
 class Logout(generic.ListView):

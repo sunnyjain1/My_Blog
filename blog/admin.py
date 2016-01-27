@@ -13,11 +13,14 @@ class EntryAdmin(MarkdownModelAdmin):
 class LikeAdmin(MarkdownModelAdmin):
 	list_display = ("user","blog","created")
 
+class UserAdmin(MarkdownModelAdmin):
+	list_display = ("slug","tagline")
+
 class CommentAdmin(MarkdownModelAdmin):
 	list_display = ("user","value","blog")
 
 admin.site.register(models.Entry, EntryAdmin)
 admin.site.register(models.Tag)
-admin.site.register(models.Bloguser)
+admin.site.register(models.Bloguser,UserAdmin)
 admin.site.register(models.Comment, CommentAdmin)
 admin.site.register(models.Like,LikeAdmin)
