@@ -19,7 +19,7 @@
  
 {% block blog_entries %}
 <div ng-app="profile" ng-controller="recent" style="margin-bottom:10px">
-    <img src="http://lh4.googleusercontent.com/-MNyRU_eTqNg/UskAvLai-PI/AAAAAAAAAME/9hQu-Xh_JKs/s300/default-avatar.png"/>
+    <img src="https://lh4.googleusercontent.com/-MNyRU_eTqNg/UskAvLai-PI/AAAAAAAAAME/9hQu-Xh_JKs/s300/default-avatar.png"/>
     <h1><a href="{% url "profile" slug=slug %}" style="text-decoration:blink;float:left:margin-bottom:10px">{{ bu.user.first_name }}&nbsp;{{bu.user.last_name}}</a></h1>
     <div ng-click="mydata.rec()"><h5><a href="" style="text-decoration:blink;float:right;margin-left:10px">recent activity</a></h5></div>
     <div ng-click="mydata.pro()"><h5><a href="" style="text-decoration:blink;float:right;margin-right:10px">Profile</a></h5></div>

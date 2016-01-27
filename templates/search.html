@@ -16,6 +16,11 @@
   <h1 class="blog-title">My First Blog</h1>
   <form method="get" id="searchform" action="/search/" class="frm">
     <input type="text" size="20" name="s" id="s" class="in" required/>
+    <select name="item">
+      <option value="default" selected>&lt;--Select one--&gt;</option>
+      <option value="Title">Titles</option>
+      <option value="Content">Content</option>
+    </select>
     <input type="submit" id="searchsubmit" value="Search" class="btn" />
   </form>
 </div>
@@ -36,7 +41,7 @@
     <h3><a href="{% url "index" %}">&lt;Back</a></h3>
   {% elif x == 0 %}
     <div class="post">
-      <h2>Entry Not Found</h2>
+      <h2>Entry Not Found Or You Have Not Select Any Field To Search.</h2>
       <br>
       <br>
       <h3><a href="{% url "index" %}">&lt;Back</a></h3>

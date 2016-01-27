@@ -17,7 +17,13 @@ class BlogIndex(generic.ListView):
 def search(request):
     if 's' in request.GET:
     	s = request.GET['s']
-    	lis = models.Entry.objects.filter(title__icontains=s)
+    	item = request.GET.get('item')
+    	if item == 'Title':
+    		lis = models.Entry.objects.filter(title__icontains=s)
+    	elif item == 'Content':
+    		lis = models.Entry.objects.filter(body__icontains=s)
+    	else:
+    		lis = []
     	if len(lis) == 0:
     		x = 0
     	else:

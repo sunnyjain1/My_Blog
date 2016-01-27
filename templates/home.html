@@ -14,8 +14,13 @@
 {% block blog_title %} 
 	<div class="blog-header">
         <h1 class="blog-title">My First Blog</h1>
-        <form method="get" id="searchform" action="/search/" class="frm">
+        <form method="get" id="searchform" action="/search/" class="frm" style="margin-top=10%">
             <input type="text" size="20" name="s" id="s" class="in" required/>
+                <select name="item">
+                  <option value="default" selected>&lt;--Select one--&gt;</option>
+                  <option value="Title">Titles</option>
+                  <option value="Content">Content</option>
+                </select>
             <input type="submit" id="searchsubmit" value="Search" class="btn" />
         </form>
       </div>

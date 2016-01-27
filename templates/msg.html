@@ -14,23 +14,23 @@
  
 {% block blog_entries %}
 <div class="x cf">
-		<form name="register" action="/message/" method="get" accept-charset="utf-8" style="margin-left:50%; margin-bottom:30%">
+		<form name="register" action="/message/" method="get" accept-charset="utf-8" style="margin-left:20%; margin-bottom:30%">
 		    <ul>
 		    	<li><label for="uname">Username&nbsp;&nbsp;:&nbsp;&nbsp;</label>
 		    	<input type="text" name="uname" placeholder="Username" required> </li>
-		    	<li><label for="fname">First Name&nbsp;:&nbsp;&nbsp;</label>
-		    	<input type="text" name="fname" placeholder="First Name" required style="margin-top:10%"> </li>
-		    	<li><label for="lname">Last Name&nbsp;:&nbsp;&nbsp;</label>
-		    	<input type="text" name="lname" placeholder="Last Name" required style="margin-top:10%"> </li>
-		        <li><label for="usermail" >Usermail&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-		        <input type="email" name="usermail" placeholder="email" required style="margin-top:10%"> </li>
+		    	<li><label for="fname" style="margin-top:10%">First Name&nbsp;:&nbsp;&nbsp;</label>
+		    	<input type="text" name="fname" placeholder="First Name" required> </li>
+		    	<li><label for="lname" style="margin-top:10%">Last Name&nbsp;:&nbsp;&nbsp;</label>
+		    	<input type="text" name="lname" placeholder="Last Name" required > </li>
+		        <li><label for="usermail" style="margin-top:10%">Usermail&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+		        <input type="email" name="usermail" placeholder="email" required> </li>
 		        <li><label for="password" style="margin-top:10%">Password&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-		        <input type="password" name="password" placeholder="password" required style="margin-top:10%"></li>
+		        <input type="password" name="password" placeholder="password" required></li>
 		        <li>
-		        <li><label for="tl">Tagline&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-		    	<input type="text" name="tl" placeholder="Tagline" style="margin-top:10%"> </li>
-		    	<li><p style="text-color:red">Username already exists <a href="/login/">Go to login </a></p></li>
-		    	<input type="submit" value="Register" style="margin-left:60%; ;margin-bottom:60%" onclick="msg"></li>
+		        <li><label for="tl" style="margin-top:10%">Tagline&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+		    	<input type="text" name="tl" placeholder="Tagline"> </li>
+		    	<li><font color="red">Username already exists <a href="/login/">Go to login </a></font></li>
+		    	<input type="submit" value="Register" style="margin-left:40%; ;margin-bottom:60%" onclick="msg"></li>
 		    </ul>
 
 		</form>
