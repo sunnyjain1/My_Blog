@@ -29,7 +29,7 @@
       Created on {{ object.created }} | Last updated on {{ object.modified }} | 
       Tagged under {{  object.tags.all|join:", " }}
     </p>
-    {{ object.body|truncatechars:800 }}...<a href="{% url "entry_detail" slug=object.slug %}">Read more</a>
+    {{ object.body|truncatechars:800|markdown }}...<a href="{% url "entry_detail" slug=object.slug %}">Read more</a>
   </div>
 {% endfor %}
 {% endblock %}
