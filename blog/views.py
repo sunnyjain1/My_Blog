@@ -191,8 +191,9 @@ def profile(request,slug):
 		for c in comment:
 			data.append({'type':'comment','blog':c.blog.title,'value':c.value,'created':c.created.strftime('%B %d, %Y %I:%M %p')})
 		return HttpResponse(json.dumps(data),content_type="application/json")
+
 class features(generic.ListView):
-	queryset = models.Entry.objects.published()
+	queryset = []
 	template_name = "features.html"
 	def get_context_data(self,**kwargs):
 		context = super(features, self).get_context_data(**kwargs)
