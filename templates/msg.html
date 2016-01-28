@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% load django_markdown %}
-{% block nav %}
-  <a class="blog-nav-item" href="{% url "index" %}">Home</a>
-  <a class="blog-nav-item" href="{% url "features" %}">New features</a>
-  <a class="blog-nav-item" href="{% url "login" %}">Log In</a>
-  <a class="blog-nav-item active" href="{% url "register" %}">Register</a>
+{% block nav %}<a class="blog-nav-item {% if act = "home" %}active{% endif %}" href="{% url "index" %}">Home</a>
+  {% for tag in alltag %}
+      <a class="blog-nav-item {% if act = tag.slug %}active{% endif %}" href="{% url "tags" slug=tag.slug %}">{{ tag.slug }}</a>
+  {% endfor %}
+  <a class="blog-nav-item" href="{% url "login" %}" style="float:right">Log In</a>
+  <a class="blog-nav-item active" href="{% url "register" %}" style="float:right">Register</a>
 {% endblock %}
 {% block blog_title %} 
 	<div class="blog-header">

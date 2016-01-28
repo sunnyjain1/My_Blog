@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 class Tag(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
+    def get_absolute_url(self):
+        return reverse("tags",kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.slug
