@@ -105,7 +105,7 @@ def BlogDetail(request,slug):
 		models.Comment.objects.create(user=uname, blog=blog[0],value=content)
 		allcom = models.Comment.objects.filter(blog=blog[0])
 		x = len(allcom)
-		data = {'username':allcom[x-1].user.username,'value':allcom[x-1].value} 
+		data = {'username':allcom[x-1].user.username,'fn':allcom[x-1].user.first_name,'ln':allcom[x-1].user.last_name,'value':allcom[x-1].value} 
 		return HttpResponse(json.dumps(data), content_type="application/json")
 		
 class send(generic.ListView):

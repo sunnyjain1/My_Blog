@@ -89,7 +89,10 @@
 				{
 					document.getElementById("comment_box").value = "";
 					var list = document.getElementById("uid");
-					$("<li>" + data['username'] + " : &nbsp; " + data['value'] + "</li><hr>").appendTo(list);
+					var username = data['username']
+					console.log(username)
+					var urlx = "/profile/"+username
+					$("<li><a href="+ urlx +">" + data['fn'] + " " + data['ln'] + "</a> : &nbsp; " + data['value'] + "</li><hr>").appendTo(list);
 				}
 			});
 		}
