@@ -24,7 +24,7 @@
     {{ object.body|markdown }}
       <input  value="{% if check == 1 %}Unlike{% else %}Like{% endif %}" id="like_btn" type="button" style="color:#fff;background:#64c8ef;pading:5px 15px;border: 1px solid rgba(0, 0, 0, 0.3);margin-right: 0;border-radius: 3px;text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);" >
 	 <b>&nbsp;<span id="num">{% if num %} {{num}} {% endif %}</span></b></input>
-	 <div class="fb-share-button" data-href="{% url "entry_detail" slug=slug %}" data-layout="button_count" style="float:right"></div>
+	 <div class="fb-share-button" data-href="{% url "entry_detail" slug=slug %}" data-layout="button" style="float:right"></div>
       <hr>
 	  <h3><b>Comments:</b></h3> <br><br>
 	  <ul id="uid">
